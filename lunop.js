@@ -1,3 +1,4 @@
+require('dotenv').config()
 async function BTClunoMYR() {
     const response = await fetch("https://api.luno.com/api/1/ticker?pair=XBTMYR",
       
@@ -24,7 +25,7 @@ async function BTClunoMYR() {
   
   
       async function exchangeRate() {
-        const response = await fetch("https://v6.exchangerate-api.com/v6/48044feb70aec7ede050eaf8/pair/USD/MYR",
+        const response = await fetch(process.env.API_KEY,
           
           {
         method: "GET", 
