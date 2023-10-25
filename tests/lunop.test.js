@@ -1,6 +1,6 @@
-import BTClunoMYR from './lib/luno.js'
-import BTCbinanceUSD from './lib/binance.js'
-import exchangeRate from './lib/exchange.js'
+import BTClunoMYR from '../lib/luno.js'
+import BTCbinanceUSD from '../lib/binance.js'
+import exchangeRate from '../lib/exchange.js'
 
 
 async function calculatePrices() {
@@ -26,3 +26,18 @@ async function calculatePrices() {
 }
 
 calculatePrices()
+
+jest.mock('../lib/luno.js');
+jest.mock('../lib/binance.js');
+jest.mock('../lib/exchange.js');
+
+describe('calculatePrices', () => {
+  it('successfully formats and calculates the given parameters', async () => {
+
+    BTClunoMYR.mockResolvedValue('1'); 
+    exchangeRate.mockResolvedValue('1'); 
+    BTCbinanceUSD.mockResolvedValue('1');
+   
+    await expect(calculatePrices()).resolves.not.toThrow();
+  });
+});
