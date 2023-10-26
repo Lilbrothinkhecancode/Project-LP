@@ -11,6 +11,16 @@ describe('BTCbinanceUSD', () => {
    
     const result = await BTCbinanceUSD();
    
-    expect(result).toBe('1');
+    expect(result).toBe(1);
+    
   });
+
+  it('handles network error', async () => {
+    const mockPrices = jest.fn().mockRejectedValue(new Error('Network Error'));
+    Binance.prototype.prices = mockPrices;
+
+    await expect(BTCbinanceUSD()).rejects.toThrow('Network Error');
+  });
+
+
 });
